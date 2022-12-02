@@ -2,6 +2,8 @@ package com.cellar.advent.day2;
 
 import com.cellar.advent.utils.AdventUtils;
 
+import java.util.Arrays;
+
 /**
  * @see <a href="https://adventofcode.com/2022/day/2">Advent of Code day 2</a>
  */
@@ -27,7 +29,7 @@ public class Main {
 			this.myPlay = myPlay;
 		}
 
-		static int computeChoiceValuePart1(String play) {
+		static int computeChoiceValuePart1(final String play) {
 			var opponent = findByOpponentPlay(play.charAt(0));
 			var me = findByMyPlay(play.charAt(play.length() - 1));
 
@@ -35,23 +37,11 @@ public class Main {
 		}
 
 		private static Choice findByOpponentPlay(char opponentPlay) {
-			for (Choice choice : Choice.values()) {
-				if (choice.getOpponentPlay() == opponentPlay) {
-					return choice;
-				}
-			}
-
-			return null;
+			return Arrays.stream(Choice.values()).filter((choice) -> choice.getOpponentPlay() == opponentPlay).findFirst().orElse(null);
 		}
 
 		private static Choice findByMyPlay(char myPlay) {
-			for (Choice choice : Choice.values()) {
-				if (choice.getMyPlay() == myPlay) {
-					return choice;
-				}
-			}
-
-			return null;
+			return Arrays.stream(Choice.values()).filter((choice) -> choice.getMyPlay() == myPlay).findFirst().orElse(null);
 		}
 
 		static int computeChoiceValuePart2(String play) {
