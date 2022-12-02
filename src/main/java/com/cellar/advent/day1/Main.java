@@ -7,6 +7,9 @@ import com.cellar.advent.utils.AdventUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @see <a href="https://adventofcode.com/2022/day/1">Advent of Code day 1</a>
+ */
 public class Main {
 
 	public static void main(String[] args) {
