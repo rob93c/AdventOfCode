@@ -2,18 +2,15 @@ package com.cellar.advent.day1;
 
 import static java.util.Comparator.reverseOrder;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import com.cellar.advent.utils.AdventUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException, URISyntaxException {
-		var file = Main.class.getClassLoader().getResource("calories.txt");
-		var lines = Files.readAllLines(Path.of(file.toURI()));
+	public static void main(String[] args) {
+		var lines = AdventUtils.getFileLines("calories.txt");
 
 		List<Long> calories = new ArrayList<>();
 		long newCalories = 0L;
