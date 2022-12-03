@@ -12,8 +12,8 @@ public class Main {
 	public static void main(String[] args) {
 		var lines = AdventUtils.getFileLines("strategy-guide.txt");
 
-		System.out.println("\nPart 1 - Total score: " + lines.stream().mapToInt(Choice::computeChoiceValuePart1).sum());
-		System.out.println("\nPart 2 - Total score: " + lines.stream().mapToInt(Choice::computeChoiceValuePart2).sum());
+		AdventUtils.print("Part 1 - Total score: " + lines.stream().mapToInt(Choice::computeChoiceValuePart1).sum());
+		AdventUtils.print("Part 2 - Total score: " + lines.stream().mapToInt(Choice::computeChoiceValuePart2).sum());
 	}
 
 	private enum Choice {
@@ -37,11 +37,11 @@ public class Main {
 		}
 
 		private static Choice findByOpponentPlay(char opponentPlay) {
-			return Arrays.stream(Choice.values()).filter((choice) -> choice.getOpponentPlay() == opponentPlay).findFirst().orElse(null);
+			return Arrays.stream(Choice.values()).filter(choice -> choice.getOpponentPlay() == opponentPlay).findFirst().orElse(null);
 		}
 
 		private static Choice findByMyPlay(char myPlay) {
-			return Arrays.stream(Choice.values()).filter((choice) -> choice.getMyPlay() == myPlay).findFirst().orElse(null);
+			return Arrays.stream(Choice.values()).filter(choice -> choice.getMyPlay() == myPlay).findFirst().orElse(null);
 		}
 
 		static int computeChoiceValuePart2(String play) {

@@ -27,7 +27,7 @@ public class Main {
 			}
 		}
 
-		System.out.println("Max calories: " + calories.stream().max(Long::compare).orElse(0L));
-		System.out.println("Top 3 total: " + calories.stream().sorted(reverseOrder()).limit(3).mapToLong(Long::valueOf).sum());
+		AdventUtils.print("Max calories: " + calories.stream().max(Long::compare).orElse(0L));
+		AdventUtils.print("Top 3 total: " + calories.stream().sorted(reverseOrder()).limit(3).mapToLong(Long::valueOf).sum());
 	}
 }

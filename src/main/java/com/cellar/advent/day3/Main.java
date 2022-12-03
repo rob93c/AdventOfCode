@@ -14,13 +14,9 @@ public class Main {
 	public static void main(String[] args) {
 		var lines = AdventUtils.getFileLines("rucksacks.txt");
 
-		int part1Priorities = 0;
+		int part1Priorities = lines.stream().mapToInt(line -> new Rucksack(line).getSharedItemValue()).sum();
 
-		for (String line : lines) {
-			part1Priorities += new Rucksack(line).getSharedItemValue();
-		}
-
-		System.out.println("\nPart 1 - Total priorities: " + part1Priorities);
+		AdventUtils.print("Part 1 - Total priorities: " + part1Priorities);
 
 		int part2Priorities = 0;
 		for (int i = 0; i < lines.size(); i += 3) {
@@ -28,7 +24,7 @@ public class Main {
 			part2Priorities += new RucksackPart2(groups).getSharedItemValue();
 		}
 
-		System.out.println("\nPart 2 - Total priorities: " + part2Priorities);
+		AdventUtils.print("Part 2 - Total priorities: " + part2Priorities);
 	}
 
 	private record Rucksack(String line) {
@@ -54,8 +50,8 @@ public class Main {
 		}
 	}
 
-	private static Stream<Character> getCharStream(String line) {
-		return line.chars().mapToObj(c -> (char) c);
+	private static Stream<Character> getCharStream(String text) {
+		return text.chars().mapToObj(c -> (char) c);
 	}
 
 	private record RucksackPart2(List<String> groups) {

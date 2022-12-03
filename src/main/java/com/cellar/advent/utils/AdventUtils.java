@@ -20,5 +20,9 @@ public final class AdventUtils {
 		}
 	}
 
+	public static void print(String text) {
+		System.out.println("\n" + text);
+	}
+
 	private AdventUtils() {}
 }
