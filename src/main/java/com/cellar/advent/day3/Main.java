@@ -46,7 +46,9 @@ public class Main {
 		}
 
 		private static int getCharValue(char c) {
-			return Character.isLowerCase(c) ? c - 96 : c - 64 + 26;
+			return Character.isLowerCase(c)
+					? c - 'a' + 1
+					: c - 'A' + 1 + 26;
 		}
 	}
 
