@@ -4,6 +4,7 @@ import com.cellar.advent.utils.AdventUtils;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @see <a href="https://adventofcode.com/2022/day/3">Advent of Code day 3</a>
@@ -13,14 +14,13 @@ public class Main {
 	public static void main(String[] args) {
 		var lines = AdventUtils.getFileLines("rucksacks.txt");
 
-		int totalPriorities = 0;
+		int part1Priorities = 0;
 
 		for (String line : lines) {
-			int half = line.length() / 2;
-			totalPriorities += new Rucksack(line.substring(0, half), line.substring(half)).getSharedItemValue();
+			part1Priorities += new Rucksack(line).getSharedItemValue();
 		}
 
-		System.out.println("\nPart 1 - Total priorities: " + totalPriorities);
+		System.out.println("\nPart 1 - Total priorities: " + part1Priorities);
 
 		int part2Priorities = 0;
 		for (int i = 0; i < lines.size(); i += 3) {
@@ -31,27 +31,31 @@ public class Main {
 		System.out.println("\nPart 2 - Total priorities: " + part2Priorities);
 	}
 
-	private record Rucksack(String left, String right) {
+	private record Rucksack(String line) {
 
 		int getSharedItemValue() {
+			int half = line.length() / 2;
+			final String left = line.substring(0, half);
+			final String right = line.substring(half);
+
 			var noRepetitionRucksack = new HashSet<Character>();
 
-			for (char c : left.toCharArray()) {
-				noRepetitionRucksack.add(c);
-			}
+			getCharStream(left).forEach(noRepetitionRucksack::add);
 
-			for (char c : right.toCharArray()) {
-				if (noRepetitionRucksack.contains(c)) {
-					return getCharValue(c);
-				}
-			}
-
-			return 0;
+			return getCharStream(right)
+					.filter(noRepetitionRucksack::contains)
+					.findFirst()
+					.map(Rucksack::getCharValue)
+					.orElse(0);
 		}
 
 		private static int getCharValue(char c) {
 			return Character.isLowerCase(c) ? c - 96 : c - 64 + 26;
 		}
+	}
+
+	private static Stream<Character> getCharStream(String line) {
+		return line.chars().mapToObj(c -> (char) c);
 	}
 
 	private record RucksackPart2(List<String> groups) {
@@ -60,20 +64,15 @@ public class Main {
 			var noRepetitionRucksack = new HashSet<Character>();
 			var repeatedChars = new HashSet<Character>();
 
-			for (char c : groups.get(0).toCharArray()) {
-				noRepetitionRucksack.add(c);
-			}
-			for (char c : groups.get(1).toCharArray()) {
-				if (noRepetitionRucksack.contains(c)) repeatedChars.add(c);
-			}
+			getCharStream(groups.get(0)).forEach(noRepetitionRucksack::add);
 
-			for (char c : groups.get(2).toCharArray()) {
-				if (repeatedChars.contains(c)) {
-					return Rucksack.getCharValue(c);
-				}
-			}
+			getCharStream(groups.get(1)).filter(noRepetitionRucksack::contains).forEach(repeatedChars::add);
 
-			return 0;
+			return getCharStream(groups.get(2))
+					.filter(repeatedChars::contains)
+					.findFirst()
+					.map(Rucksack::getCharValue)
+					.orElse(0);
 		}
 	}
 
