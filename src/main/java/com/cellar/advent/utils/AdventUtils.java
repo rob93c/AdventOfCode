@@ -20,6 +20,10 @@ public final class AdventUtils {
 		}
 	}
 
+	public static String getFirstLine(String resourceName) {
+		return getFileLines(resourceName).get(0);
+	}
+
 	public static void print(String text) {
 		System.out.println("\n" + text);
 	}
