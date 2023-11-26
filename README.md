@@ -1,3 +1,3 @@
-# Advent of Code 2022
+# Advent of Code
 
-Homemade solutions to [Advent of Code 2022](https://adventofcode.com/2022) challenges.
+Homemade solutions to [Advent of Code](https://adventofcode.com) challenges.
