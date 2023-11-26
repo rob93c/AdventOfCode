@@ -1,4 +1,4 @@
-package com.cellar.advent.day1;
+package com.cellar.advent.year22.day1;
 
 import static java.util.Comparator.reverseOrder;
 

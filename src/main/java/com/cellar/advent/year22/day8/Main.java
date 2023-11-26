@@ -1,4 +1,4 @@
-package com.cellar.advent.day8;
+package com.cellar.advent.year22.day8;
 
 import static java.util.Comparator.naturalOrder;
 

@@ -1,4 +1,4 @@
-package com.cellar.advent.day6;
+package com.cellar.advent.year22.day6;
 
 import static java.util.HashSet.newHashSet;
 

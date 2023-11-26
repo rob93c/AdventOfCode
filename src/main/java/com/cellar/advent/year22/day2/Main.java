@@ -1,4 +1,4 @@
-package com.cellar.advent.day2;
+package com.cellar.advent.year22.day2;
 
 import com.cellar.advent.utils.AdventUtils;
 
