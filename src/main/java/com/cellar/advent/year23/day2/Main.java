@@ -17,6 +17,7 @@ public class Main {
         var lines = AdventUtils.getFileLines("cubes.txt");
 
         part1(lines);
+        part2(lines);
     }
 
     private static void part1(List<String> lines) {
@@ -31,6 +32,18 @@ public class Main {
         }
 
         AdventUtils.print("Sum of the possible games: " + sumIds);
+    }
+
+    private static void part2(List<String> lines) {
+        int totalPower = 0;
+
+        for (var line : lines) {
+            var game = new Game(line);
+
+            totalPower += getPower(game.getSets());
+        }
+
+        AdventUtils.print("Sum of the power: " + totalPower);
     }
 
     private static boolean isPossible(Game game) {
@@ -69,11 +82,28 @@ public class Main {
                 colors.put(matcher.group(2), Integer.parseInt(matcher.group(1)));
             }
 
+            /*
+            Active only for part 1
             if (colors.values().stream().mapToInt(integer -> integer).sum() > 39) {
                 return null;
             }
+            */
 
             return colors;
         }
+    }
+
+    private static int getPower(List<Map<String, Integer>> sets) {
+        int maxRed = 1;
+        int maxGreen = 1;
+        int maxBlue = 1;
+
+        for (var colors : sets) {
+            maxRed = Math.max(maxRed, colors.get("red"));
+            maxGreen = Math.max(maxGreen, colors.get("green"));
+            maxBlue = Math.max(maxBlue, colors.get("blue"));
+        }
+
+        return maxRed * maxGreen * maxBlue;
     }
 }
